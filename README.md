@@ -29,7 +29,7 @@ Linux-3.18にて動作を確認しています。
 ```
 
 あとは、/dev/nullの代用とするなりしましょう。   
-`# dd if=/dev/wasawasa of=/dev/sda`とすれば、ディスクを*wasawasa*で初期化できます。
+`# dd if=/dev/wasawasa of=/dev/sda`等とすれば、ディスクを*wasawasa*で初期化できます。
 
   
 #### License  
