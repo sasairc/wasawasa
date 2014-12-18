@@ -18,6 +18,7 @@
 #include <linux/fs.h>
 #include <linux/cdev.h>
 #include <linux/uaccess.h>
+#include <asm/string.h>
 
 MODULE_LICENSE("WTFPL");
 MODULE_AUTHOR("sasairc");
@@ -40,11 +41,11 @@ static ssize_t chardev_read(struct file *file, char *buf, size_t count, loff_t *
         char *str = "わさわさ";
 
         down_interruptible(&cdev_sem);
-        copy_to_user(buf, str, (sizeof(str) - 2));
+        copy_to_user(buf, str, strlen(str));
 
-        *offset += (sizeof(str) - 2);
+        *offset += strlen(str);
         up(&cdev_sem);
-        return (sizeof(str) - 2);
+        return strlen(str);
 }
 
 static struct file_operations cdev_fops = {
@@ -67,7 +68,6 @@ static int __init chardev_init(void)
                 printk(KERN_WARNING "%s: cdev_add() failure.\n", MODNAME);
                 return ret;
         }
-
         sema_init(&cdev_sem, 1);
 
         return 0;
