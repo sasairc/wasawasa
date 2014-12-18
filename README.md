@@ -1,7 +1,7 @@
 wasawasa
 ========
 
-![default](https://cloud.githubusercontent.com/assets/9349287/5473377/4ac2d712-864c-11e4-8081-d12b5118722a.png)
+![default](https://cloud.githubusercontent.com/assets/9349287/5483849/a2d5852c-86be-11e4-8792-7008c6d888da.png)
 
 わさわさするだけの（没キャラクラ）デバイスドライバ 。   
 Linux-3.18にて動作を確認しています。  
