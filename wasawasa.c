@@ -68,6 +68,7 @@ static int __init chardev_init(void)
                 printk(KERN_WARNING "%s: cdev_add() failure.\n", MODNAME);
                 return ret;
         }
+
         sema_init(&cdev_sem, 1);
 
         return 0;
