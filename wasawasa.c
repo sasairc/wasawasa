@@ -1,10 +1,16 @@
 /*
- * やすなちゃんかわいい
+ * wasawasa - Baby, please kernel module. (BPKM)
+ * 
+ * Copyright © 2014 sasairc
+ * This work is free. You can redistribute it and/or modify it under the
+ * terms of the Do What The Fuck You Want To Public License, Version 2,
+ * as published by Sam Hocevar.Hocevar See the COPYING file or http://www.wtfpl.net/
+ * for more details.
  */
  
 #define MODNAME "wasawasa"
-#define CD_MAJOR        254
-#define CD_MINORS       1
+#define CHAR_MAJOR      254
+#define CHAR_MINOR      1
 
 #include <linux/semaphore.h>
 #include <linux/kernel.h>
@@ -31,10 +37,10 @@ static int chardev_release(struct inode *inode, struct file *file)
 
 static ssize_t chardev_read(struct file *file, char *buf, size_t count, loff_t *offset)
 {
-        char *str = "wasawasa";
+        char *str = "わさわさ";
 
         down_interruptible(&cdev_sem);
-        copy_to_user(buf, str, (sizeof(str) + 1));
+        copy_to_user(buf, str, (sizeof(str) - 2));
 
         *offset += (sizeof(str) + 1);
         up(&cdev_sem);
@@ -53,10 +59,10 @@ static int __init chardev_init(void)
         int ret;
         dev_t dev;
 
-        dev = MKDEV(CD_MAJOR, 0);
+        dev = MKDEV(CHAR_MAJOR, 0);
         cdev_init(&cdev, &cdev_fops);
 
-        ret = cdev_add(&cdev, dev, CD_MINORS);
+        ret = cdev_add(&cdev, dev, CHAR_MINOR);
         if (ret < 0) {
                 printk(KERN_WARNING "%s: cdev_add() failure.\n", MODNAME);
                 return ret;
@@ -71,9 +77,9 @@ static void __exit chardev_exit(void)
 {
         dev_t dev;
 
-        dev = MKDEV(CD_MAJOR, 0);
+        dev = MKDEV(CHAR_MAJOR, 0);
         cdev_del(&cdev);
-        unregister_chrdev_region(dev, CD_MINORS);
+        unregister_chrdev_region(dev, CHAR_MINOR);
 }
 
 module_init(chardev_init);

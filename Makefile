@@ -16,6 +16,13 @@ install:
 	mknod /dev/wasawasa c 254 0
 	chmod 0666 /dev/wasawasa
 
+mknod:
+	mknod /dev/wasawasa c 254 0
+	chmod 0666 /dev/wasawasa
+
+rmnod:
+	-$(RM) -f /dev/wasawasa
+
 uninstall:
 	-$(RM) -f $(PREFIX)/wasawasa.ko
 	-$(RM) -f /dev/wasawasa
