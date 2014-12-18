@@ -29,6 +29,3 @@ uninstall:
 
 clean:
 	-$(RM) -f $(obj-m) $(clean-files)
-
-clean_all:
-	-$(RM) -f $(obj-m) $(clean-files-all)
