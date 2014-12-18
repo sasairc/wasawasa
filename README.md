@@ -30,15 +30,17 @@ Linux-3.18にて動作を確認しています。
 
 あとは、/dev/nullの代用とするなりしましょう。   
 `# dd if=/dev/wasawasa of=/dev/sda`等とすれば、ディスクが*わさわさ*します。   
+  
+#### Digression
+このままでは、リブート後に`/dev/wasawasa`が消滅（自動作成されない）してしまいます。     
+それを悲しく思う方は、udevにデバイス管理を依頼する、または`/etc/rc.local`などの起動スクリプトに    
 
-ただ、リブート後には`/dev/wasawasa`が消滅（自動作成されない）してしまうので   
-udevにデバイス管理を依頼するか、`/etc/rc.local`などの起動スクリプトに    
 ```
 insmod /lib/modules/`uname -r`/kernel/drivers/block/wasawasa.ko
 mknod /dev/wasawasa c 254 0
 chmod 0666 /dev/wasawasa
 ```
-のような記述すると、次回起動後にもわさわさできます。   
+のような記述すると良いかもしれません。   
 
 #### License  
   [どうとでも勝手にしやがれクソッタレ・公衆利用許諾書(WTFPL Version 2)] (http://www.wtfpl.net/txt/copying/)
