@@ -42,9 +42,9 @@ static ssize_t chardev_read(struct file *file, char *buf, size_t count, loff_t *
         down_interruptible(&cdev_sem);
         copy_to_user(buf, str, (sizeof(str) - 2));
 
-        *offset += (sizeof(str) + 1);
+        *offset += (sizeof(str) - 2);
         up(&cdev_sem);
-        return (sizeof(str) + 1);
+        return (sizeof(str) - 2);
 }
 
 static struct file_operations cdev_fops = {
