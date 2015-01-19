@@ -26,17 +26,17 @@ MODULE_AUTHOR("sasairc");
 static struct cdev cdev;
 static struct semaphore cdev_sem;
 
-static int chardev_open(struct inode *inode, struct file *file)
+static int open_chardev(struct inode *inode, struct file *file)
 {
         return 0;
 }
 
-static int chardev_release(struct inode *inode, struct file *file)
+static int release_chardev(struct inode *inode, struct file *file)
 {
         return 0;
 }
 
-static ssize_t chardev_read(struct file *file, char *buf, size_t count, loff_t *offset)
+static ssize_t read_chardev(struct file *file, char *buf, size_t count, loff_t *offset)
 {
         char *str = "わさわさ";
 
@@ -50,12 +50,12 @@ static ssize_t chardev_read(struct file *file, char *buf, size_t count, loff_t *
 
 static struct file_operations cdev_fops = {
         .owner  = THIS_MODULE,
-        .open   = chardev_open,
-        .read   = chardev_read,
-        .release = chardev_release,
+        .open   = open_chardev,
+        .read   = read_chardev,
+        .release = release_chardev,
 };
 
-static int __init chardev_init(void)
+static int __init init_chardev(void)
 {
         int ret;
         dev_t dev;
@@ -74,7 +74,7 @@ static int __init chardev_init(void)
         return 0;
 }
 
-static void __exit chardev_exit(void)
+static void __exit exit_chardev(void)
 {
         dev_t dev;
 
@@ -83,5 +83,5 @@ static void __exit chardev_exit(void)
         unregister_chrdev_region(dev, CHAR_MINOR);
 }
 
-module_init(chardev_init);
-module_exit(chardev_exit);
+module_init(init_chardev);
+module_exit(exit_chardev);
