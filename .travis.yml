@@ -4,7 +4,7 @@ compiler:
     - clang
 before_install:
     - sudo apt-get update
-    - sudo apt-get -y install linux-headers-generic
+    - sudo apt-get -y install linux-generic
 script:
     - make CC="$CC"
     - make clean
