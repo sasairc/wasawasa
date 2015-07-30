@@ -1,36 +1,39 @@
-obj-m	:= wasawasa.o
-clean-files := *.o *.ko *.mod.[co] *.symvers *.order
+#
+#    Makefile for wasawasa
+#
 
-TARGET	:= wasawasa.ko
+obj-m	= wasawasa.o
+TARGET	= wasawasa.ko
 PREFIX	:= /lib/modules/$(shell uname -r)/kernel/drivers/block
 KERNDIR	:= /lib/modules/$(shell uname -r)/build
 BUILDIR	:= $(shell pwd)
-EXTRA_CFLAGS +=
 MAKE	:= make
-CC		:= cc
-RM		:= rm
+CC	:= cc
+RM	:= rm
 
-.PHONY:	all
 all: $(TARGET)
 
-wasawasa.ko: wasawasa.c
+$(TARGET): $(TARGET:.ko=.c)
 	$(MAKE) -C $(KERNDIR) SUBDIRS=$(BUILDIR) modules
 
-install:
-	cp -v wasawasa.ko $(PREFIX)/wasawasa.ko
-	mknod /dev/wasawasa c 254 0
-	chmod 0666 /dev/wasawasa
+install: install-module mknod
+
+install-module: $(TARGET)
+	cp  wasawasa.ko $(PREFIX)/wasawasa.ko
 
 mknod:
 	mknod /dev/wasawasa c 254 0
 	chmod 0666 /dev/wasawasa
 
+uninstall: uninstall-module rmnod
+
+uninstall-module:
+	-$(RM) -f $(PREFIX)/wasawasa.ko
+
 rmnod:
 	-$(RM) -f /dev/wasawasa
 
-uninstall:
-	-$(RM) -f $(PREFIX)/wasawasa.ko
-	-$(RM) -f /dev/wasawasa
-
 clean:
-	-$(RM) -f $(obj-m) $(clean-files)
+	-$(RM) -f *.o *.ko *.mod.[co] *.symvers *.order
+
+.PHONY:	all install install-module mknod uninstall uninstall-module rmnod clean
