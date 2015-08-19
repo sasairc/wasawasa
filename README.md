@@ -3,7 +3,7 @@ wasawasa
 [![license](https://img.shields.io/badge/License-WTFPL2-blue.svg?style=flat)](http://www.wtfpl.net/txt/copying/)
 [![yasuna](https://img.shields.io/badge/yasuna-kawaii-orange.svg?style=flat)](http://houbunsha.co.jp/comics/detail.php?p=%A5%AD%A5%EB%A5%DF%A1%BC%A5%D9%A5%A4%A5%D9%A1%BC)
 
-![default](http://41.media.tumblr.com/953e8b381ebd3bbaa61991174be27a2e/tumblr_nizhz4ARCF1u2jamko1_1280.png)
+![default](http://41.media.tumblr.com/57625201904a8f6e6e9175a5a45ca9e6/tumblr_ntc4gs9H531u2jamko1_1280.png)
 
 わさわさするだけの（没キャラクラ）デバイスドライバ 。   
 x86-64なLinux-3.18 - Linux-4.1.3にて動作を確認しています。  
